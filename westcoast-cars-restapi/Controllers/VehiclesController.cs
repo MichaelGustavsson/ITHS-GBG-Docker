@@ -16,7 +16,7 @@ public class VehiclesController : ControllerBase
     }
 
 		[HttpPost]
-		public async Task<ActionResult> AddVehicle(Vehicle vehicle){
+		public async Task<ActionResult> AddVehicle([FromBody]Vehicle vehicle){
 			await _context.Vehicles.AddAsync(vehicle);
 			await _context.SaveChangesAsync();
 			return StatusCode(201);

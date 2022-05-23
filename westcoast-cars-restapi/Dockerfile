@@ -16,6 +16,13 @@ RUN dotnet restore
 # Kopiera alla filer ifrån vårt projekt över till arbetskatalogen...
 COPY . .
 
+# Installera dotnet cli tools
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="${PATH}:/root/.dotnet/tools"
+
+# Kör vi code migration
+RUN dotnet ef database update
+
 # Skapa ett publicerings paket...
 RUN dotnet publish -c Release -o out
 
@@ -23,7 +30,12 @@ RUN dotnet publish -c Release -o out
 # ----------------------------------------------------------------------
 FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
+WORKDIR /app
+
 # Kopiera katalogen out till app katalogen
+# Kopiera databasen till produktionsmiljön
+COPY --from=build-env /app/westcoast.db .
 COPY --from=build-env /app/out .
 
+# Sätt startkommandot för vår applikation till dotnet "dll".
 ENTRYPOINT [ "dotnet", "westcoast-cars-restapi.dll" ]
