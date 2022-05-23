@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "westcoastcars-app/1.0.0": {
+        "runtime": {
+          "westcoastcars-app.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "westcoastcars-app/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
